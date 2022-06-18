@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Sign Up</h3>
+    <div class="box">
+        <form method="POST" action="/signup">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-medium" type="email" name="email" placeholder="Email" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-medium" type="text" name="name" placeholder="Name" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-medium" type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label"> Select 3 movie genre preferences</label>
+                <div class="control">
+                    <div class="select" style="width: 100%">
+                        <select name="pref1" id="" style="width: 100%">
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="scifi">Sci-fi</option>
+                            <option value="romantic">Romantic</option>
+                            <option value="adventure">Adventure</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+
+                <div class="control">
+                    <div class="select" style="width: 100%">
+                        <select name="pref2" id="" style="width: 100%">
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="scifi">Sci-fi</option>
+                            <option value="romantic">Romantic</option>
+                            <option value="adventure">Adventure</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+
+                <div class="control">
+                    <div class="select" style="width: 100%">
+                        <select name="pref3" id="" style="width: 100%">
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="scifi">Sci-fi</option>
+                            <option value="romantic">Romantic</option>
+                            <option value="adventure">Adventure</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-medium is-fullwidth">Sign Up</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

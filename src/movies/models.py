@@ -10,6 +10,7 @@ from sqlalchemy import (
     create_engine
 )
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 
 def get_postgres_uri():
@@ -30,6 +31,10 @@ engine = create_engine(
     isolation_level="REPEATABLE READ",
 )
 
+local_session = sessionmaker(autoflush=False,
+                            autocommit=False, bind=engine)
+
+db = local_session()
 
 class Movie(Base):
     __tablename__ = "movies"
@@ -40,6 +45,14 @@ class Movie(Base):
     rating = Column(Float)
     year = Column(Integer)
     create_time = Column(TIMESTAMP(timezone=True), index=True)
+
+class User(Base):
+    __tablename__ = "users"
+    user_id = Column(Integer, primary_key=True)
+    email = Column(String)
+    password = Column(String)
+    name = Column(String)
+    magic_number = Column(Integer)
 
 
 def start_mappers():
