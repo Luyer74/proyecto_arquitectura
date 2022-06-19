@@ -10,6 +10,8 @@ from .uri_post import PostgresURI
 # -- Single Responsibility
 # Separated the class get_postgres_uri from models
 
+
+#Creating base, engine and session objects
 Base = declarative_base(
     metadata=MetaData(),
 )
@@ -26,7 +28,7 @@ local_session = sessionmaker(autoflush=False,
 # create db session
 db = local_session()
 
-# each class is in its one file for better architecture
+# each class model is in its one file, SRP
 
 def start_mappers():
     Base.metadata.create_all(engine)

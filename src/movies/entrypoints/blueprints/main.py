@@ -7,7 +7,7 @@ from movies.models import db
 from movies.movie_class import Movie
 main = Blueprint('main', __name__)
 
-
+#Factory method for main routes
 @main.route('/')
 def index():
     return render_template('index.html')

@@ -3,7 +3,7 @@ from movies.models import db
 from movies.user_class import User
 from flask_login import login_user, login_required, logout_user
 
-
+#Factory method for auth routes
 auth = Blueprint('auth', __name__)
 
 

@@ -7,11 +7,15 @@ from movies.models import db
 from movies.user_class import User
 from movies.movie_fetcher import get_movies, insert
 
+
+# OCP principle, new functionalities can be adding or importing through other files but not by modyfing this existing code
+
+#Initialize app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 models.start_mappers()
 
-# serch movies and obtain the csv
+# search movies and obtain the csv
 get_movies()
 # pass the csv to postgresql
 insert()
@@ -28,6 +32,6 @@ def load_user(user_id):
     return db.query(User).get(int(user_id))
 
 
-# register blueprints of the routes
+# register blueprints of the routes, uses dependency inversion since it is an abstraction
 app.register_blueprint(auth_blueprint)
 app.register_blueprint(main_blueprint)
