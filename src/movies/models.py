@@ -1,3 +1,4 @@
+import imp
 import os
 from sqlalchemy import (
     MetaData,
@@ -5,22 +6,18 @@ from sqlalchemy import (
     Integer,
     String,
     Float,
-    TIMESTAMP,
-    Text,
     create_engine
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from flask_login import UserMixin
+from movie_class import Movie
+from user_class import User
+from postgres_uri import PostgresURI
 
 
-def get_postgres_uri():
-    host = os.environ.get("DB_HOST", "postgres")
-    port = 5432
-    password = os.environ.get("DB_PASS", "abc123")
-    user, db_name = "movies", "movies"
-    return f"postgresql://{user}:{password}@{host}:{port}/{db_name}"
-
+# -- Single Responsibility
+# Separated the class get_postgres_uri from models
 
 Base = declarative_base(
     metadata=MetaData(),
@@ -28,15 +25,18 @@ Base = declarative_base(
 
 
 engine = create_engine(
-    get_postgres_uri(),
+    PostgresURI.get_postgres_uri(),
     isolation_level="REPEATABLE READ",
 )
 
 local_session = sessionmaker(autoflush=False,
-                            autocommit=False, bind=engine)
+                             autocommit=False, bind=engine)
 
-#create db session
+# create db session
 db = local_session()
+
+# each class is in its one file for better architecture
+
 
 class Movie(Base):
     __tablename__ = "movies"
@@ -48,11 +48,12 @@ class Movie(Base):
     year = Column(Integer)
     link = Column(String)
 
+
 class User(UserMixin, Base):
 
     def get_id(self):
         return (self.user_id)
-    
+
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True)
     email = Column(String)
