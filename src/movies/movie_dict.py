@@ -14,11 +14,15 @@ def store_movie_data(list):
         for movie in list:
             writer.writerow({**movie})
 
+# Class of Exp using the abstract method
+
 
 class Exp(ABC):
     @abstractmethod
     def save(list):
         pass
+
+# Get here if the exporter type is a json type
 
 
 class jsonExp(Exp):
@@ -27,9 +31,11 @@ class jsonExp(Exp):
         with open("movie_results.json", "w") as file:
             file.write(json_object)
 
+# Gets here if the exporter type is a csv type
+
 
 class csvExp(Exp):
-    def save(self, list):
+    def save(list):
         fields = ["preference_key", "movie_title", "star_cast",
                   "rating", "year", "place", "vote", "link"]
         with open("movie_results.csv", "w", newline="") as file:
@@ -38,9 +44,10 @@ class csvExp(Exp):
             for movie in list:
                 writer.writerow({**movie})
 
+# checks which type the exporter is
 
-class SimpleExpFac:
 
+class ExpFac:
     def createExporter(exporterType: str) -> Exp:
         exporter: Exp = None
 

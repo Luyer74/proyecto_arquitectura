@@ -1,6 +1,8 @@
 import os
 from .uri_inter import UriInter
 
+# We separeted this method and are now using the Interface segregation method
+
 
 class PostgresURI(UriInter):
     def get_postgres_uri():
