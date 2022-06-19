@@ -1,15 +1,13 @@
-from unicodedata import name
 import requests
 import re
-import csv
 from movies import models
-from movie_dict import SimpleExpFac
+from movies.movie_dict import SimpleExpFac
 import pandas as pd
 from bs4 import BeautifulSoup
 
 
 def insert():
-    data = pd.read_csv("/src/movies/movie_results.csv")
+    data = pd.read_csv("/src/movie_results.csv")
     data['movie_id'] = data.index
     try:
         data.to_sql(con=models.engine, name="movies",
@@ -19,7 +17,7 @@ def insert():
         print("error jeje")
 
 
-def main():
+def get_movies():
     # Downloading imdb top 250 movie's data
     url = 'http://www.imdb.com/chart/top'
     response = requests.get(url)
@@ -60,7 +58,3 @@ def main():
 
     exporter = SimpleExpFac.createExporter('csv')
     exporter.save(list)
-
-
-if name == '__main__':
-    main()

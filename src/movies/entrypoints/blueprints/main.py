@@ -1,10 +1,10 @@
 # Luis Yerik Arambula Barrera A00825080
 # Alejandro Lopez Ramones A01366287
 
-from operator import is_
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
-from movies.models import Movie, db
+from movies.models import db
+from movies.movie_class import Movie
 main = Blueprint('main', __name__)
 
 

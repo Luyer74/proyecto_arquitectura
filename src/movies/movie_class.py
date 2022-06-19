@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float
-from models import Base
+from .models import Base
 
 # class for Movie for better and cleaner architecture
 

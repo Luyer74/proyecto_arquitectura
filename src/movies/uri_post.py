@@ -1,5 +1,5 @@
 import os
-from uri_inter import UriInter
+from .uri_inter import UriInter
 
 
 class PostgresURI(UriInter):

@@ -29,7 +29,7 @@ class jsonExp(Exp):
 
 
 class csvExp(Exp):
-    def save(list):
+    def save(self, list):
         fields = ["preference_key", "movie_title", "star_cast",
                   "rating", "year", "place", "vote", "link"]
         with open("movie_results.csv", "w", newline="") as file:

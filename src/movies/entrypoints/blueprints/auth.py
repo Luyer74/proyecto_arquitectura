@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from movies.models import db, User
+from movies.models import db
+from movies.user_class import User
 from flask_login import login_user, login_required, logout_user
 
 

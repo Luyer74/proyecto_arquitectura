@@ -2,10 +2,9 @@ from flask import Flask, request
 from blueprints.auth import auth as auth_blueprint
 from blueprints.main import main as main_blueprint
 from movies import models
-import pandas as pd
 from flask_login import LoginManager
 from movies.models import db
-from user_class import User
+from movies.user_class import User
 from movies.movie_fetcher import get_movies, insert
 
 app = Flask(__name__)

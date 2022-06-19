@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from models import Base
+from movies.models import Base
 from flask_login import UserMixin
 
 
