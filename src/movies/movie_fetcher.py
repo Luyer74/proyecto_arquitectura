@@ -1,22 +1,24 @@
 import requests
 import re
 import csv
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from movies import models
+import pandas as pd
 from bs4 import BeautifulSoup
 
-# from movies.models import get_postgres_uri
-
-# DEFAULT_SESSION_FACTORY = sessionmaker(
-#     bind=create_engine(
-#         get_postgres_uri(),
-#         isolation_level="REPEATABLE READ",
-#     )
-# )
-# session = DEFAULT_SESSION_FACTORY()
 
 
-def main():
+def insert():
+    data = pd.read_csv("/src/movies/movie_results.csv")
+    data['movie_id'] = data.index
+    try:
+        data.to_sql(con=models.engine, name="movies", if_exists="replace", index=False)
+        print("movies updated!")
+    except:
+        print("error jeje")
+
+
+def get_movies():
+    print("updating movies...")
     # Downloading imdb top 250 movie's data
     url = 'http://www.imdb.com/chart/top'
     response = requests.get(url)
@@ -59,6 +61,3 @@ def main():
         writer.writeheader()
         for movie in list:
             writer.writerow({**movie})
-
-if __name__ == '__main__':
-    main()

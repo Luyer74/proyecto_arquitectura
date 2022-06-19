@@ -1,3 +1,16 @@
 {% extends "base.html" %} {% block content %}
-<h1 class="title">Welcome, Anthony!</h1>
+<h1 class="title">Welcome {{ name }}!</h1>
+{% if not is_rating %}
+    <a class="button" href="{{ url_for('main.profile', rating ='false')}}">Unreverse</a>
+{% else %}
+    <a class="button" href="{{ url_for('main.profile')}}">Reverse</a>
+{% endif %}
+<br>
+<h3 class="title">Peliculas Recomendadas</h3>
+{% for movie in data %}
+    <p><a href="https://www.imdb.com{{movie['link']}}" target="_blank"> 
+    {{movie["movie_title"]}} 
+    </a></p>
+   
+{% endfor %}
 {% endblock %}

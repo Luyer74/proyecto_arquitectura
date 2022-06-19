@@ -11,6 +11,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from flask_login import UserMixin
 
 
 def get_postgres_uri():
@@ -34,6 +35,7 @@ engine = create_engine(
 local_session = sessionmaker(autoflush=False,
                             autocommit=False, bind=engine)
 
+#create db session
 db = local_session()
 
 class Movie(Base):
@@ -44,9 +46,13 @@ class Movie(Base):
     movie_title = Column(String)
     rating = Column(Float)
     year = Column(Integer)
-    create_time = Column(TIMESTAMP(timezone=True), index=True)
+    link = Column(String)
 
-class User(Base):
+class User(UserMixin, Base):
+
+    def get_id(self):
+        return (self.user_id)
+    
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True)
     email = Column(String)
